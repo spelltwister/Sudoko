@@ -182,5 +182,16 @@ namespace Sudoko
 
             return true;
         }
+
+        public IEnumerable<int> GetBoardSequnce()
+        {
+            for (int r = 0; r < this.Size; ++r)
+            {
+                for(int c = 0; c < this.Size; ++c)
+                {
+                    yield return Data[r, c] ?? 0;
+                }
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace SudokoTester
 {
     using System.Diagnostics;
     using Sudoko;
+    using Newtonsoft.Json;
 
     [TestClass]
     public class UnitTest1
@@ -117,6 +118,18 @@ namespace SudokoTester
 
             string message = $"{solution.Count} Solution(s) Found in {sw.ElapsedMilliseconds} ms";
             Console.WriteLine(message);
+        }
+
+        [TestMethod]
+        public void DoubleNullableIntArraySerializesAndDeserializesCorrectly()
+        {
+            var seri = JsonConvert.SerializeObject(DifficultSudoku6);
+
+            Assert.IsFalse(String.IsNullOrWhiteSpace(seri));
+
+            int?[,] deseri = JsonConvert.DeserializeObject<int?[,]>(seri);
+
+            Assert.AreEqual(DifficultSudoku.Length, deseri.Length);
         }
     }
 }
